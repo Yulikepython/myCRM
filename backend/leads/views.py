@@ -7,3 +7,7 @@ from .models import Lead
 class LeadListView(ListView):
     template_name = "leads/leads_list.html"
     model = Lead
+
+class LeadDetailView(DetailView):
+    template_name = "leads/leads_detail.html"
+    model = Lead
