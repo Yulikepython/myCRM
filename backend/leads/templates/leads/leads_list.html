@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if object_list %}
+        {% for obj in object_list %}
+            <p>{{ obj }}</p>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}
