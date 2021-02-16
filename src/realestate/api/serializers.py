@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from property.models import PropertyModel, Rent
+from realestate.models import PropertyModel, Rent
 
 class PropertyModelSerializer(serializers.ModelSerializer):
     class Meta:
