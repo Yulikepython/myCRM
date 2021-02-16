@@ -26,12 +26,12 @@ class PropertyModel(models.Model):
 
 class Rent(models.Model):
     property_obj = models.ForeignKey(PropertyModel, on_delete=models.CASCADE)
-    room = models.CharField(max_length=50)
+    room = models.CharField(max_length=50, blank=True, null=True)
     payment = models.IntegerField(default=0)
     maintenance_fee = models.IntegerField(default=0)
     deposit = models.IntegerField(default=0)
     key_money = models.IntegerField(default=0)
-    zumen = models.FileField(upload_to="zumen")
+    zumen = models.FileField(upload_to="zumen", blank=True, null=True)
 
     def __str__(self):
         return f"{self.property_obj.title} {self.room}"
