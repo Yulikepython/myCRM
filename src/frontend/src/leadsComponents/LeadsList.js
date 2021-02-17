@@ -5,10 +5,14 @@ import cookie from "react-cookies"
 import LeadInline from "./LeadInline"
 
 class LeadsList extends Component {
+    constructor(props){
+        super(props)
+        this.toggleLeadListClass = this.toggleLeadListClass.bind(this)
+    }
     state = {
         view:"Lead List View", 
         leads: [],
-        leadListClass: "card my-2",
+        leadListClass: "card my-2 p-3",
     }
 
     loadLeads(){
@@ -61,9 +65,20 @@ class LeadsList extends Component {
 
     }
 
+    toggleLeadListClass(event){
+        event.preventDefault()
+        this.setState(prevState => {
+            if (prevState.leadListClass === ""){
+                return {leadListClass: "card my-2 p-3"}
+            } else {
+                return {leadListClass: ""}
+            }
+        })
+    }
+
     componentDidMount(){
         this.setState({
-            leads: []
+            leads: [],
         })
         this.loadLeads()
     }
@@ -72,7 +87,8 @@ class LeadsList extends Component {
         const {leads, leadListClass} = this.state
         return(
             <div>
-                {this.state.view}
+                <p>{this.state.view}</p>
+                <button onClick={this.toggleLeadListClass}>Toggle Class</button>
                 {leads.length > 0 ? 
                     leads.map((leadItem, index)=>{
                         return (
