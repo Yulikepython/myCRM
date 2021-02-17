@@ -3,4 +3,7 @@ import ReactDom from "react-dom"
 
 import App from "./App"
 
-ReactDom.render(<App />, document.getElementById("app"))
+let myComponent = document.getElementById("app")
+if (myComponent !== null){
+    ReactDom.render(<App />, myComponent)
+}

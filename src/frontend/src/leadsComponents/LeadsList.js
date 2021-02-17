@@ -3,6 +3,7 @@ import "whatwg-fetch"
 import cookie from "react-cookies"
 
 import LeadInline from "./LeadInline"
+import LeadCreate from "./LeadCreate"
 
 class LeadsList extends Component {
     constructor(props){
@@ -105,7 +106,7 @@ class LeadsList extends Component {
                     }) : 
                     '<p>No Leads Found</p>'
                 }
-                
+                <LeadCreate />
             </div>
         )
     }
