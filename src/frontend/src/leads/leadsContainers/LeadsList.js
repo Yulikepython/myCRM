@@ -1,6 +1,7 @@
 import React, {Component } from "react"
-import "whatwg-fetch"
 import cookie from "react-cookies"
+import "whatwg-fetch"
+
 
 //function
 import loadAPIs from "../../functions/loadAPIs"
@@ -14,6 +15,7 @@ class LeadsList extends Component {
         super(props)
         this.toggleLeadListClass = this.toggleLeadListClass.bind(this)
         this.changeCreateFormClass = this.changeCreateFormClass.bind(this)
+        this.handleNewApi = this.handleNewApi.bind(this)
     }
     state = {
         view:"Lead List View", 
@@ -22,36 +24,14 @@ class LeadsList extends Component {
         createFormClass: "d-none",
     }
 
-    createLead(){
-        const endpoint = "/api/leads/create/"
-        const csrfToken = cookie.load('csrftoken')
-        let data = {
-            name: "",
-            category: "",
-            description:  "",
-            stage: "",
-            person: "",
-        }
-
-        if (csrfToken !== undefined) {
-            const lookupOptions = {
-                method: "POST", 
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRFToken": csrfToken
-                },
-                body: JSON.stringify(data),
-                credentials: "include"
-            }
-            fetch(endpoint, lookupOptions)
-                .then(response => response.json())
-                .then(responseData => {
-                    console.log(responseData)
-                })
-                .catch(error=> console.log("error: ", error))
-        }
-
+    handleNewApi(newApiList){
+        const currentApiList = this.state.apiList
+        currentApiList.push(newApiList)
+        this.setState({
+            apiList: currentApiList
+        })
     }
+
 
     toggleLeadListClass(event){
         event.preventDefault()
@@ -84,6 +64,7 @@ class LeadsList extends Component {
 
     render(){
         const {apiList, leadListClass} = this.state
+        const csrfToken = cookie.load('csrftoken')
         return(
             <div>
                 <p>{this.state.view}</p>
@@ -117,13 +98,20 @@ class LeadsList extends Component {
                     }
                 </tbody>
                 </table>
-                <button 
-                    className="btn btn-primary btn-sm"
-                    onClick={this.changeCreateFormClass}
-                >Create New</button>
-                <div className={this.state.createFormClass}>
-                    <LeadCreate/>
+                { (csrfToken !== undefined && csrfToken !== null) ?
+                <div>
+                    <button 
+                        className="btn btn-primary btn-sm"
+                        onClick={this.changeCreateFormClass}
+                    >Create New</button>
+                    <div className={this.state.createFormClass}>
+                        <div className="my-2">
+                            <LeadCreate newApiCreated={this.handleNewApi} />   
+                        </div>
+                    </div>
                 </div>
+                : ""}
+                
                 
             </div>
         )

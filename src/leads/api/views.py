@@ -10,7 +10,7 @@ from leads.api.serializers import LeadSerializer, PersonSerializer
 
 
 class LeadApiList(ListAPIView):
-    queryset = Lead.objects.all()
+    queryset = Lead.objects.all().order_by("-created_at")
     serializer_class = LeadSerializer
 
 class LeadApiListCreate(ListCreateAPIView):

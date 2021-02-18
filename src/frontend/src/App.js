@@ -1,6 +1,4 @@
 import React, { Component } from "react"
-
-
 import LeadsList from "./leads/leadsContainers/LeadsList"
 // import stepView from "./leads/leadsComponents/StepView"
 

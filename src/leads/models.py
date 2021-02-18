@@ -22,10 +22,10 @@ class Person(models.Model):
 
 class Lead(models.Model):
     name = models.CharField(max_length=100)
-    category = models.CharField(max_length=5)
+    category = models.CharField(max_length=20)
     description = models.TextField()
-    stage = models.CharField(max_length=5)
-    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    stage = models.CharField(max_length=20)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE, default=1)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
