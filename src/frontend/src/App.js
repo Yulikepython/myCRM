@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 
+
 import LeadsList from "./leads/leadsContainers/LeadsList"
+// import stepView from "./leads/leadsComponents/StepView"
 
 class App extends Component {
     render(){
@@ -8,6 +10,8 @@ class App extends Component {
             <div className="container mt-3">
                 My CRM is working!
                 <LeadsList />
+                <hr />
+                {/* <stepView /> */}
             </div>
         )
     }

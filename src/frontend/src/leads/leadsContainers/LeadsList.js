@@ -4,7 +4,6 @@ import cookie from "react-cookies"
 
 import LeadInline from "./LeadInline"
 import LeadCreate from "./LeadCreate"
-import LeadsTable from "../leadsComponents/LeadsTable"
 
 class LeadsList extends Component {
     constructor(props){
