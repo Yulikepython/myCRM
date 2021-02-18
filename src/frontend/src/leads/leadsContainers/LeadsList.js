@@ -2,6 +2,10 @@ import React, {Component } from "react"
 import "whatwg-fetch"
 import cookie from "react-cookies"
 
+//function
+import loadAPIs from "../../functions/loadAPIs"
+
+//other components
 import LeadInline from "./LeadInline"
 import LeadCreate from "./LeadCreate"
 
@@ -13,28 +17,9 @@ class LeadsList extends Component {
     }
     state = {
         view:"Lead List View", 
-        leads: [],
+        apiList: [],
         leadListClass: "card my-2 p-3",
         createFormClass: "d-none",
-    }
-
-    loadLeads(){
-        const endpoint = "/api/leads/create/"
-        let thisComp = this
-        const lookupOptions = {
-            method: "GET", 
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }
-        fetch(endpoint, lookupOptions)
-            .then(response => response.json())
-            .then(responseData => {
-                thisComp.setState({
-                    leads: responseData
-                })
-            })
-            .catch(error=> console.log("error: ", error))
     }
 
     createLead(){
@@ -92,13 +77,13 @@ class LeadsList extends Component {
 
     componentDidMount(){
         this.setState({
-            leads: [],
+            apiList: [],
         })
-        this.loadLeads()
+        loadAPIs(this, "/api/leads/create/")
     }
 
     render(){
-        const {leads, leadListClass} = this.state
+        const {apiList, leadListClass} = this.state
         return(
             <div>
                 <p>{this.state.view}</p>
@@ -113,11 +98,12 @@ class LeadsList extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {leads.length > 0 ? 
-                        leads.map((leadItem, index)=>{
+                    {apiList.length > 0 ? 
+                        apiList.map((leadItem, index)=>{
                             return (
                                 <LeadInline 
                                     key={index}
+                                    id={index}
                                     name = {leadItem.name}
                                     category={leadItem.category}
                                     description={leadItem.description}
