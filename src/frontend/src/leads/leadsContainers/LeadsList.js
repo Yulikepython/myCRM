@@ -4,16 +4,19 @@ import cookie from "react-cookies"
 
 import LeadInline from "./LeadInline"
 import LeadCreate from "./LeadCreate"
+import LeadsTable from "../leadsComponents/LeadsTable"
 
 class LeadsList extends Component {
     constructor(props){
         super(props)
         this.toggleLeadListClass = this.toggleLeadListClass.bind(this)
+        this.changeCreateFormClass = this.changeCreateFormClass.bind(this)
     }
     state = {
         view:"Lead List View", 
         leads: [],
         leadListClass: "card my-2 p-3",
+        createFormClass: "d-none",
     }
 
     loadLeads(){
@@ -77,6 +80,17 @@ class LeadsList extends Component {
         })
     }
 
+    changeCreateFormClass(event){
+        event.preventDefault()
+        this.setState(prevState => {
+            if (prevState.createFormClass === "d-none"){
+                return {createFormClass: "d-block"}
+            } else {
+                return {createFormClass: "d-none"}
+            }
+        })
+    }
+
     componentDidMount(){
         this.setState({
             leads: [],
@@ -90,23 +104,42 @@ class LeadsList extends Component {
             <div>
                 <p>{this.state.view}</p>
                 <button onClick={this.toggleLeadListClass}>Toggle Class</button>
-                {leads.length > 0 ? 
-                    leads.map((leadItem, index)=>{
-                        return (
-                            <LeadInline 
-                                key={index}
-                                name = {leadItem.name}
-                                category={leadItem.category}
-                                description={leadItem.description}
-                                stage={leadItem.stage}
-                                person={leadItem.person}
-                                elClass={leadListClass}
-                            />
-                        )
-                    }) : 
-                    '<p>No Leads Found</p>'
-                }
-                <LeadCreate />
+                <table className="table">
+                <thead className="thead-success">
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Stage</th>
+                    <th scope="col">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {leads.length > 0 ? 
+                        leads.map((leadItem, index)=>{
+                            return (
+                                <LeadInline 
+                                    key={index}
+                                    name = {leadItem.name}
+                                    category={leadItem.category}
+                                    description={leadItem.description}
+                                    stage={leadItem.stage}
+                                    person={leadItem.person}
+                                    elClass={leadListClass}
+                                />
+                            )
+                        }) : 
+                        '<p>No Leads Found</p>'
+                    }
+                </tbody>
+                </table>
+                <button 
+                    className="btn btn-primary btn-sm"
+                    onClick={this.changeCreateFormClass}
+                >Create New</button>
+                <div className={this.state.createFormClass}>
+                    <LeadCreate/>
+                </div>
+                
             </div>
         )
     }

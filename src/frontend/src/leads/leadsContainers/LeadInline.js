@@ -7,11 +7,13 @@ class LeadInline extends Component {
         const showContent = elClass.includes("card") ? "d-block": "d-none"
 
         return(
-            <div>
-                <p>
-                    { name } - { category } - <span className={elClass}> {description} - {stage} - {person} </span>
-                </p>
-            </div>
+                <tr>
+                    {/* { category } - {elClass}>  {person} </span> */}
+                    <th scope="row">1</th>
+                    <td>{ name }</td>
+                    <td>{stage}</td>
+                    <td>{description}</td>
+                </tr>
         )
     }
 }

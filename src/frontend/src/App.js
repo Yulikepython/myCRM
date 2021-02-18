@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 
-import LeadsList from "./leadsComponents/LeadsList"
+import LeadsList from "./leads/leadsContainers/LeadsList"
 
 class App extends Component {
     render(){
