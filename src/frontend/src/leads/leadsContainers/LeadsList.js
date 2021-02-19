@@ -89,6 +89,7 @@ class LeadsList extends Component {
                                     category={leadItem.category}
                                     description={leadItem.description}
                                     stage={leadItem.stage}
+                                    stageNum={leadItem.stageNum}
                                     person={leadItem.person}
                                     elClass={leadListClass}
                                 />
@@ -111,8 +112,6 @@ class LeadsList extends Component {
                     </div>
                 </div>
                 : ""}
-                
-                
             </div>
         )
     }

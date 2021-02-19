@@ -102,9 +102,9 @@ class LeadCreate extends Component {
                 <label>
                     ステージ:
                     <select name="stage" value={this.state.stage} onChange={this.handleChange} required="required">
-                        <option value="サスペクト">サスペクト</option>
-                        <option value="面談済">面談済</option>
-                        <option value="追客">追客</option>
+                        <option value="0">反響</option>
+                        <option value="1">案内</option>
+                        <option value="2">追客</option>
                     </select>
                     </label>
                 </div>
