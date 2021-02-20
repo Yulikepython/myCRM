@@ -4,9 +4,11 @@ import { Steps } from 'antd';
 class LeadInline extends Component {
     
     render(){
-        const {id, name, category, description, stage, stageNum, person, elClass} = this.props
-        const showContent = elClass.includes("card") ? "d-block": "d-none"
+        const {id, name, category, description, stage, stageNum, person} = this.props
         const { Step } = Steps;
+        const shortenDescription = description.length > 30 ? description.slice(0,30) + "...（続き）"
+                                    :description
+
         return(
                 <tr>
                     {/* { category } - {elClass}>  {person} </span> */}
@@ -20,7 +22,7 @@ class LeadInline extends Component {
                         <Step title="クロージング" description="This is a description." />
                     </Steps>,
                     </td>
-                    <td>{description}</td>
+                    <td>{shortenDescription}</td>
                 </tr>
         )
     }

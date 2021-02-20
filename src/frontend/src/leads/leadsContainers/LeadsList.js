@@ -8,19 +8,17 @@ import loadAPIs from "../../functions/loadAPIs"
 
 //other components
 import LeadInline from "./LeadInline"
-import LeadCreate from "./LeadCreate"
+import LeadCreate from "../leadsForms/LeadCreate"
 
 class LeadsList extends Component {
     constructor(props){
         super(props)
-        this.toggleLeadListClass = this.toggleLeadListClass.bind(this)
         this.changeCreateFormClass = this.changeCreateFormClass.bind(this)
         this.handleNewApi = this.handleNewApi.bind(this)
     }
     state = {
         view:"Lead List View", 
         apiList: [],
-        leadListClass: "card my-2 p-3",
         createFormClass: "d-none",
     }
 
@@ -33,16 +31,6 @@ class LeadsList extends Component {
     }
 
 
-    toggleLeadListClass(event){
-        event.preventDefault()
-        this.setState(prevState => {
-            if (prevState.leadListClass === ""){
-                return {leadListClass: "card my-2 p-3"}
-            } else {
-                return {leadListClass: ""}
-            }
-        })
-    }
 
     changeCreateFormClass(event){
         event.preventDefault()
@@ -63,12 +51,11 @@ class LeadsList extends Component {
     }
 
     render(){
-        const {apiList, leadListClass} = this.state
+        const {apiList} = this.state
         const csrfToken = cookie.load('csrftoken')
         return(
             <div>
                 <p>{this.state.view}</p>
-                <button onClick={this.toggleLeadListClass}>Toggle Class</button>
                 <table className="table">
                 <thead className="thead-success">
                     <tr>
@@ -91,7 +78,6 @@ class LeadsList extends Component {
                                     stage={leadItem.stage}
                                     stageNum={leadItem.stageNum}
                                     person={leadItem.person}
-                                    elClass={leadListClass}
                                 />
                             )
                         }) : 
