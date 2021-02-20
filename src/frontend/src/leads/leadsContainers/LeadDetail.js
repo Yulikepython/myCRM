@@ -1,56 +1,80 @@
 import React, { Component } from "react"
+import cookie from "react-cookies"
+import 'whatwg-fetch'
+import { Link } from 'react-router-dom'
 
-import loadAPIs from "../../functions/loadAPIs"
 
-export default class LeadDetail extends Component{
-    state = {
-        id:null,
-        leadItem: null,
-        doneLoading:false,
-    }
+class LeadDetail extends Component{
+
+    constructor(props){
+        super(props)
+        this.state = {
+            id:null,
+            leadItem: "",
+            doneLoading:false
+        }
+        this.loadLeadDetail = this.loadLeadDetail.bind(this)
+        }
 
     loadLeadDetail(id){
         let thisComp = this
+        const endpoint = `/api/leads/${id}/`
         const lookupOptions = {
             method: "GET", 
             headers: {
                 "Content-Type": "application/json"
             }
         }
-        fetch("/api/leads/{id}", lookupOptions)
-            .then(response => response.json())
-            .then(responseData => {
+        
+        fetch(endpoint, lookupOptions)
+            .then(function(response){
+                if (response.status == 404){
+                    console.log('Page not found')
+                }
+                return response.json()
+            }).then(function(responseData){
+                if (responseData.detail){
+                    thisComp.setState({
+                        doneLoading: true,
+                        leadItem: null
+                    })
+                } else {
+                console.log('in the function:', responseData)
+                const {name} = responseData
                 thisComp.setState({
-                    loadItem: responseData,
-                    doneLoading:true
-                })
+                        doneLoading: true,
+                        leadItem: responseData,
+                    })
+                }
+            }).catch(function(error){
+                console.log("error", error)
             })
-            .catch(error=> console.log("error: ", error))
-}
+    }
 
     componentDidMount(){
+        console.log("mount")
         this.setState({
-            id:null,
-            leadItem: null
+            id: null,
+            leadItem: ""
         })
-        if (this.props.match){
-            const {id} = this.props.match.params
-            console.log('id',id)
-            this.setState({
-                id:id,
-                doneLoading:false,
-            })
-            this.loadLeadDetail(id)
-            console.log(this.state)
-        }
+    if (this.props.match){
+        const {id} = this.props.match.params
+        this.setState({
+            id: id,
+            doneLoading: false
+        })
+        this.loadLeadDetail(id)
+    }
     }
     render(){
-        const {id, doneLoading} = this.state
+        console.log('render', this.state)
         return (
             <div>
-                <p>{this.state.loadItem}</p>
+                <p>{this.leadItem.name}</p>
             </div>
             
         )
     }
 }
+
+export default LeadDetail
