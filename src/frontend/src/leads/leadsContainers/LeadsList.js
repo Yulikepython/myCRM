@@ -30,8 +30,6 @@ class LeadsList extends Component {
         })
     }
 
-
-
     changeCreateFormClass(event){
         event.preventDefault()
         this.setState(prevState => {
@@ -47,7 +45,7 @@ class LeadsList extends Component {
         this.setState({
             apiList: [],
         })
-        loadAPIs(this, "/api/leads/create/")
+        loadAPIs(this, "/api/leads/")
     }
 
     render(){
@@ -56,41 +54,12 @@ class LeadsList extends Component {
         return(
             <div>
                 <p>{this.state.view}</p>
-                <table className="table">
-                <thead className="thead-success">
-                    <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Stage</th>
-                    <th scope="col">Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {apiList.length > 0 ? 
-                        apiList.map((leadItem, index)=>{
-                            return (
-                                <LeadInline 
-                                    key={index}
-                                    id={index}
-                                    name = {leadItem.name}
-                                    category={leadItem.category}
-                                    description={leadItem.description}
-                                    stage={leadItem.stage}
-                                    stageNum={leadItem.stageNum}
-                                    person={leadItem.person}
-                                />
-                            )
-                        }) : 
-                        '<p>No Leads Found</p>'
-                    }
-                </tbody>
-                </table>
                 { (csrfToken !== undefined && csrfToken !== null) ?
                 <div>
                     <button 
                         className="btn btn-primary btn-sm"
                         onClick={this.changeCreateFormClass}
-                    >Create New</button>
+                    >+</button>
                     <div className={this.state.createFormClass}>
                         <div className="my-2">
                             <LeadCreate newApiCreated={this.handleNewApi} />   
@@ -98,6 +67,35 @@ class LeadsList extends Component {
                     </div>
                 </div>
                 : ""}
+                <table className="table">
+                    <thead className="thead-success">
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Stage</th>
+                        <th scope="col">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {apiList.length > 0 ? 
+                            apiList.map((leadItem, index)=>{
+                                return (
+                                    <LeadInline 
+                                        key={index}
+                                        num={index}
+                                        id={leadItem.id}
+                                        name = {leadItem.name}
+                                        category={leadItem.category}
+                                        description={leadItem.description}
+                                        step={leadItem.step}//this would be a model id
+                                        person={leadItem.person}
+                                    />
+                                )
+                            }) : 
+                            '<p>No Leads Found</p>'
+                        }
+                    </tbody>
+                </table>
             </div>
         )
     }

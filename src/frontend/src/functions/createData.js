@@ -18,7 +18,7 @@ export default function createData(data, endpoint, newApiCreated){
         fetch(endpoint, lookupOptions)
             .then(response => response.json())
             .then(responseData => {
-                console.log(responseData)
+                // console.log(responseData)
                 if (newApiCreated){
                     newApiCreated(responseData)
                 }

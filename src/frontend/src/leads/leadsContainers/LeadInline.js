@@ -1,21 +1,29 @@
 import React, { Component } from "react"
+import { Link } from "react-router-dom"
 import { Steps } from 'antd';
+
 
 class LeadInline extends Component {
     
     render(){
-        const {id, name, category, description, stage, stageNum, person} = this.props
+        const {num, id, name, category, description, stage, stageNum, person} = this.props
         const { Step } = Steps;
         const shortenDescription = description.length > 30 ? description.slice(0,30) + "...（続き）"
                                     :description
-
         return(
                 <tr>
                     {/* { category } - {elClass}>  {person} </span> */}
-                    <th scope="row">{ id + 1 }</th>
+                    <th scope="row">
+                        <Link maintainScrollPosition={false} to={{
+                                    pathname: `/leads/${id}`,
+                                    state: {fromDashboard: false}
+                                }}>{ num + 1 }
+                        </Link>
+                    </th>
                     <td>{ name }</td>
-                    <td>{stage}:
-                    <Steps current={stageNum}>
+                    <td>
+                        {/* {step} is a model object with id */}
+                        <Steps current={stageNum}>
                         <Step title="反響" description="This is a description." />
                         <Step title="案内" subTitle="subtitle" description="This is a description." />
                         <Step title="検討" description="This is a description." />
