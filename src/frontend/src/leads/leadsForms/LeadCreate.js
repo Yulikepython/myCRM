@@ -127,6 +127,7 @@ class LeadCreate extends Component {
                         name="checking"
                         checked={this.state.checking}
                         onChange={this.handleChange}
+                        required="false"
                     />
                     </label>
                     

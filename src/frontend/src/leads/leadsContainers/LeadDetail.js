@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import LeadCard from "../components/LeadCard"
 import cookie from "react-cookies"
 import 'whatwg-fetch'
 import { Link } from 'react-router-dom'
@@ -13,7 +14,6 @@ class LeadDetail extends Component{
             leadItem: "",
             doneLoading:false
         }
-        this.loadLeadDetail = this.loadLeadDetail.bind(this)
         }
 
     loadLeadDetail(id){
@@ -39,8 +39,6 @@ class LeadDetail extends Component{
                         leadItem: null
                     })
                 } else {
-                console.log('in the function:', responseData)
-                const {name} = responseData
                 thisComp.setState({
                         doneLoading: true,
                         leadItem: responseData,
@@ -52,7 +50,6 @@ class LeadDetail extends Component{
     }
 
     componentDidMount(){
-        console.log("mount")
         this.setState({
             id: null,
             leadItem: ""
@@ -67,10 +64,10 @@ class LeadDetail extends Component{
     }
     }
     render(){
-        console.log('render', this.state)
+        const displayText = this.state.doneLoading ? < LeadCard st={this.state.leadItem}/> : "loading..."
         return (
             <div>
-                <p>{this.leadItem.name}</p>
+                <p>{displayText}</p>
             </div>
             
         )
