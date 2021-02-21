@@ -25,6 +25,13 @@ class LeadDetail extends Component{
                 "Content-Type": "application/json"
             }
         }
+
+        const csrfToken = cookie.load('csrftoken')
+        if (csrfToken !== undefined) {
+            lookupOptions["credentials"] = 'include'
+            lookupOptions["headers"]["X-CSRFToken"] = csrfToken
+        }
+
         
         fetch(endpoint, lookupOptions)
             .then(function(response){
@@ -68,6 +75,13 @@ class LeadDetail extends Component{
         return (
             <div>
                 <p>{displayText}</p>
+                <Link 
+                        to={{
+                            pathname: `/leads/`,
+                            }}
+                >Back to Leads</Link>
+                {this.state.leadItem.owner === true ? <p>Update Lead</p> : ""}
+                
             </div>
             
         )

@@ -14,7 +14,7 @@ class LeadInline extends Component {
                 <tr>
                     {/* { category } - {elClass}>  {person} </span> */}
                     <th scope="row">
-                        <Link maintainScrollPosition={false} to={{
+                        <Link to={{
                                     pathname: `/leads/${id}`,
                                     state: {fromDashboard: false}
                                 }}>{ num + 1 }

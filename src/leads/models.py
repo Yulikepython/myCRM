@@ -1,6 +1,8 @@
 from django.db import models
 from django.db.models.signals import post_save
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
 
 
 class Approach(models.Model):
@@ -32,6 +34,7 @@ class Step(models.Model):
         return str(self.lead)
 
 class Lead(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     name = models.CharField(max_length=100)
     category = models.CharField(max_length=20)
     description = models.TextField()
