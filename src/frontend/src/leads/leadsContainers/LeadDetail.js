@@ -4,6 +4,8 @@ import cookie from "react-cookies"
 import 'whatwg-fetch'
 import { Link } from 'react-router-dom'
 
+import LeadUpdate from "../leadsForms/LeadUpdate"
+
 
 class LeadDetail extends Component{
 
@@ -80,7 +82,7 @@ class LeadDetail extends Component{
                             pathname: `/leads/`,
                             }}
                 >Back to Leads</Link>
-                {this.state.leadItem.owner === true ? <p>Update Lead</p> : ""}
+                {this.state.leadItem.owner === true ? <LeadUpdate lead={this.state.leadItem} /> : ""}
                 
             </div>
             
