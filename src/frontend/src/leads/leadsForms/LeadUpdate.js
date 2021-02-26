@@ -97,12 +97,14 @@ class LeadUpdate extends Component {
     }
 
     render(){
+        const {name, description, category, step, person} = this.state
         return (
             <form onSubmit={this.handleSubmit} name="createForm">
                 <div className="form-group">
                     <input 
                         type="text" 
                         name="name" 
+                        value={name}
                         className="form-control" 
                         placeholder="リード名" 
                         onChange={this.handleChange}
@@ -125,6 +127,7 @@ class LeadUpdate extends Component {
                     <textarea
                         type="text" 
                         name="description" 
+                        value={description}
                         className="form-control" 
                         placeholder="メモ" 
                         onChange={this.handleChange}
