@@ -10,7 +10,7 @@ const LeadCard = (props) => {
                 <p>{props.st.step}</p>
             </Card>
         </div>
-    )
+)
 }
 
 export default LeadCard

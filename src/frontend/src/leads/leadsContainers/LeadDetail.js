@@ -4,7 +4,7 @@ import cookie from "react-cookies"
 import 'whatwg-fetch'
 import { Link } from 'react-router-dom'
 
-import LeadUpdate from "../leadsForms/LeadUpdate"
+import LeadForm from "../leadsContainers/LeadForm"
 
 
 class LeadDetail extends Component{
@@ -16,7 +16,14 @@ class LeadDetail extends Component{
             leadItem: "",
             doneLoading:false
         }
+        this.handleLeadItemUpdated = this.handleLeadItemUpdated.bind(this)
         }
+    
+    handleLeadItemUpdated(leadItemData){
+        this.setState({
+            leadItem: leadItemData
+        })
+    }
 
     loadLeadDetail(id){
         let thisComp = this
@@ -48,7 +55,7 @@ class LeadDetail extends Component{
                         leadItem: null
                     })
                 } else {
-                thisComp.setState({
+                thisComp.setState({      
                         doneLoading: true,
                         leadItem: responseData,
                     })
@@ -73,7 +80,8 @@ class LeadDetail extends Component{
     }
     }
     render(){
-        const displayText = this.state.doneLoading ? < LeadCard st={this.state.leadItem}/> : "loading..."
+        const {doneLoading, leadItem} = this.state
+        const displayText = doneLoading ? < LeadCard st={leadItem}/> : "loading..."
         return (
             <div>
                 <p>{displayText}</p>
@@ -82,8 +90,7 @@ class LeadDetail extends Component{
                             pathname: `/leads/`,
                             }}
                 >Back to Leads</Link>
-                {this.state.leadItem.owner === true ? <LeadUpdate lead={this.state.leadItem} /> : ""}
-                
+                {leadItem.owner === true ? <LeadForm lead={leadItem} leadItemUpdated={this.handleLeadItemUpdated} /> : ""}
             </div>
             
         )

@@ -1,9 +1,17 @@
 from pathlib import Path
 import os
 
-#myCustomConfigFile
-configFilePath = "/home/hnish/dev/config/"
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
+#pick up config_path.txt because base_folder is on a different path in each computer I use.
+configTXTPath = BASE_DIR / 'config_path.txt'
+
+#make config_path.txt on BASE_DIR(src folder)
+with open(f'{configTXTPath}') as f:
+    configFilePath = f.read().strip()
+
+# pick up the keys from each files for database
 with open(f'{configFilePath}secret_key.cnf') as f:
     secret_key = f.read().strip()
 

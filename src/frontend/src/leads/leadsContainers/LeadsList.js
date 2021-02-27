@@ -1,5 +1,6 @@
 import React, {Component } from "react"
 import cookie from "react-cookies"
+import { Link } from "react-router-dom"
 import "whatwg-fetch"
 
 
@@ -8,7 +9,7 @@ import loadAPIs from "../../functions/loadAPIs"
 
 //other components
 import LeadInline from "./LeadInline"
-import LeadCreate from "../leadsForms/LeadCreate"
+import LeadForm from "../leadsContainers/LeadForm"
 
 class LeadsList extends Component {
     constructor(props){
@@ -53,8 +54,14 @@ class LeadsList extends Component {
         const csrfToken = cookie.load('csrftoken')
         return(
             <div>
-                <p>{this.state.view}</p>
-                { (csrfToken !== undefined && csrfToken !== null) ?
+                <h1>{this.state.view}</h1>
+                <Link to={{
+                                    pathname: "/leads/create",
+                                    state: {fromDashboard: false}
+                                }}>+
+                </Link>
+                {/* togglerthing */}
+                {/* { (csrfToken !== undefined && csrfToken !== null) ?
                 <div>
                     <button 
                         className="btn btn-primary btn-sm"
@@ -62,11 +69,11 @@ class LeadsList extends Component {
                     >+</button>
                     <div className={this.state.createFormClass}>
                         <div className="my-2">
-                            <LeadCreate newApiCreated={this.handleNewApi} />   
+                            <LeadForm newApiCreated={this.handleNewApi} />   
                         </div>
                     </div>
                 </div>
-                : ""}
+                : ""} */}
                 <table className="table">
                     <thead className="thead-success">
                         <tr>
