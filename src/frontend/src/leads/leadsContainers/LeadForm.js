@@ -151,6 +151,7 @@ class LeadForm extends Component {
     render(){
         const {name, description, category, step, person} = this.state
         const cancelClass = this.props.lead !== undefined ? "d-none" : ""
+        const createNoneClass = this.props.lead === undefined ? "d-none" : ""
         return (
             <div>
                 <form onSubmit={this.handleSubmit} name="createForm">
@@ -198,7 +199,7 @@ class LeadForm extends Component {
                             onChange={this.handleChange}
                         />
                     </div>
-                    <div className="form-group">
+                    <div className={`form-group ${createNoneClass}`}>
                         <input 
                             type="text" 
                             name="step" 

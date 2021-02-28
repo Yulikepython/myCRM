@@ -16,8 +16,13 @@ def img_create_path(instance, filename):
 class PropertyModel(models.Model):
     title = models.CharField(max_length=100)
     prefecture = models.CharField(max_length=10, default="神奈川県")
-    city = models.CharField(max_length=100, default="横浜市都筑区")
-    address = models.CharField(max_length=255, blank=True, null=True)
+    city = models.CharField(max_length=100, default="横浜市都筑区仲町台")
+    city_eng = models.CharField(max_length=100, default="nakamachidai Tsuzuki-ku Yokohama-shi")
+    branch_number = models.CharField(max_length=255, blank=True, null=True)
+    closest_train = models.CharField(max_length=50, blank=True, null=True)
+    closest_station = models.CharField(max_length=30, blank=True, null=True)
+    walking_from_station = models.IntegerField(blank=True, null=True)
+    date_of_construction = models.DateField(blank=True, null=True)
     bicycle_parking = models.BooleanField(default=False)
     parking = models.BooleanField(default=False)
 
@@ -27,10 +32,17 @@ class PropertyModel(models.Model):
 class Rent(models.Model):
     property_obj = models.ForeignKey(PropertyModel, on_delete=models.CASCADE)
     room = models.CharField(max_length=50, blank=True, null=True)
-    payment = models.IntegerField(default=0)
-    maintenance_fee = models.IntegerField(default=0)
-    deposit = models.IntegerField(default=0)
+    floor = models.IntegerField(default=1)
+    floor_plan = models.CharField(max_length=100, blank=True, null=True)
+    footprint = models.IntegerField(blank=True, null=True, verbose_name="㎡数")
+    rent = models.IntegerField(default=0)
+    management_fee = models.IntegerField(default=0)
+    common_fee = models.IntegerField(default=0)
+    sec_deposit = models.IntegerField(default=0)
     key_money = models.IntegerField(default=0)
+    gurantee_deposit = models.IntegerField(default=0)
+    insurance_fee = models.IntegerField(default=18000)
+    renewal_fee = models.IntegerField(default=0)
     zumen = models.FileField(upload_to="zumen", blank=True, null=True)
 
     def __str__(self):
