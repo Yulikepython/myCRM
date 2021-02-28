@@ -15,6 +15,7 @@ def img_create_path(instance, filename):
 
 class PropertyModel(models.Model):
     title = models.CharField(max_length=100)
+    title_eng = models.CharField(max_length=100, blank=True, null=True)
     prefecture = models.CharField(max_length=10, default="神奈川県")
     city = models.CharField(max_length=100, default="横浜市都筑区仲町台")
     city_eng = models.CharField(max_length=100, default="nakamachidai Tsuzuki-ku Yokohama-shi")
@@ -32,6 +33,7 @@ class PropertyModel(models.Model):
 class Rent(models.Model):
     property_obj = models.ForeignKey(PropertyModel, on_delete=models.CASCADE)
     room = models.CharField(max_length=50, blank=True, null=True)
+    available = models.BooleanField(default=True)
     floor = models.IntegerField(default=1)
     floor_plan = models.CharField(max_length=100, blank=True, null=True)
     footprint = models.IntegerField(blank=True, null=True, verbose_name="㎡数")
