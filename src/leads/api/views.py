@@ -11,11 +11,6 @@ from leads.models import Lead, Person
 from leads.api.serializers import LeadSerializer, PersonSerializer
 from leads.api.permissions import IsOwnerOrReadOnly
 
-
-class LeadApiList(ListAPIView):
-    queryset = Lead.objects.all().order_by("-created_at")
-    serializer_class = LeadSerializer
-
 class LeadApiListCreate(ListCreateAPIView):
     queryset = Lead.objects.all()
     serializer_class = LeadSerializer
@@ -36,18 +31,16 @@ class LeadApiDestroy(DestroyAPIView):
     serializer_class = LeadSerializer
     lookup_field = 'pk'
 
-class PersonApiList(ListAPIView):
-    queryset = Person.objects.all()
-    serializer_class = PersonSerializer
-
-class PersonApiRetrieve(RetrieveAPIView):
-    queryset = Person.objects.all()
-    serializer_class = PersonSerializer
-    lookup_field = 'pk'
+#person model
 
 class PersonApiListCreate(ListCreateAPIView):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
+
+class PersonApiRetrieve(RetrieveUpdateDestroyAPIView):
+    queryset = Person.objects.all()
+    serializer_class = PersonSerializer
+    lookup_field = 'pk'
 
 class PersonApiDestroy(DestroyAPIView):
     queryset = Person.objects.all()

@@ -3,21 +3,17 @@ import cookie from "react-cookies"
 import { Link } from "react-router-dom"
 import "whatwg-fetch"
 
-
 //function
 import loadAPIs from "../../functions/loadAPIs"
 
-//other components
-import LeadInline from "./LeadInline"
-
-class LeadsList extends Component {
+class PeopleList extends Component {
     constructor(props){
         super(props)
         this.changeCreateFormClass = this.changeCreateFormClass.bind(this)
         this.handleNewApi = this.handleNewApi.bind(this)
     }
     state = {
-        view:"Lead List View", 
+        view:"People List View", 
         apiList: [],
         createFormClass: "d-none",
     }
@@ -45,7 +41,7 @@ class LeadsList extends Component {
         this.setState({
             apiList: [],
         })
-        loadAPIs(this, "/api/leads/")
+        loadAPIs(this, "/api/people/")
     }
 
     render(){
@@ -54,11 +50,11 @@ class LeadsList extends Component {
         return(
             <div>
                 <h1>{this.state.view}</h1>
-                <Link to={{
-                                    pathname: "/leads/create",
+                {/* <Link to={{
+                                    pathname: "/people/create",
                                     state: {fromDashboard: false}
                                 }}>+
-                </Link>
+                </Link> */}
                 {/* togglerthing */}
                 {/* { (csrfToken !== undefined && csrfToken !== null) ?
                 <div>
@@ -76,26 +72,26 @@ class LeadsList extends Component {
                 <table className="table">
                     <thead className="thead-success">
                         <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Stage</th>
-                        <th scope="col">Description</th>
+                            <th scope="col">#</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">PhoneNumber</th>
                         </tr>
                     </thead>
                     <tbody>
                         {apiList.length > 0 ? 
-                            apiList.map((leadItem, index)=>{
+                            apiList.map((peopleItem, index)=>{
                                 return (
-                                    <LeadInline 
-                                        key={index}
-                                        num={index}
-                                        id={leadItem.id}
-                                        name = {leadItem.name}
-                                        category={leadItem.category}
-                                        description={leadItem.description}
-                                        step={leadItem.step}//this would be a model id
-                                        person={leadItem.person}
-                                    />
+                                    <tr> 
+                                        <td scope="col">{peopleItem.id}</td>
+                                        <td>{ peopleItem.lastName }</td>
+                                        <td>{peopleItem.firstName}</td>
+                                        <td>
+                                            {peopleItem.email}
+                                        </td>
+                                        <td>{peopleItem.phone_number}</td>
+                                    </tr>
                                 )
                             }) : 
                             '<p>No Leads Found</p>'
@@ -107,4 +103,4 @@ class LeadsList extends Component {
     }
 }
 
-export default LeadsList
+export default PeopleList

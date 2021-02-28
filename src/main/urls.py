@@ -7,6 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("frontend.urls")),
     re_path(r'^leads/', TemplateView.as_view(template_name='frontend/index.html')),
+    re_path(r'^people/', TemplateView.as_view(template_name='frontend/index.html')),
     path('api/', include("leads.api.urls")),
     path('api/', include("realestate.api.urls")),
     path('api/', include("applicant.api.urls")),
