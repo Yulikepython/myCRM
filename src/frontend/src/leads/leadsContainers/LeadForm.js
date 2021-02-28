@@ -10,7 +10,7 @@ class LeadForm extends Component {
         name: "",
         category:"",
         description: "",
-        step: "",
+        stage: "",
         person: "",
         checking:false,
         errors: {},
@@ -128,7 +128,7 @@ class LeadForm extends Component {
             name: "",
             category:"",
             description: "",
-            step: "",
+            stage: "",
             person: "",
         })
     }
@@ -140,7 +140,7 @@ class LeadForm extends Component {
                 name: lead.name,
                 category:lead.category,
                 description: lead.description,
-                step: lead.step,
+                stage: lead.stage,
                 person: lead.person,
             })
         } else {
@@ -149,7 +149,7 @@ class LeadForm extends Component {
     }
 
     render(){
-        const {name, description, category, step, person} = this.state
+        const {name, description, category, stage, person} = this.state
         const cancelClass = this.props.lead !== undefined ? "d-none" : ""
         const createNoneClass = this.props.lead === undefined ? "d-none" : ""
         return (
@@ -200,14 +200,25 @@ class LeadForm extends Component {
                         />
                     </div>
                     <div className={`form-group ${createNoneClass}`}>
-                        <input 
-                            type="text" 
-                            name="step" 
-                            value={step}
-                            className="form-control" 
-                            placeholder="step" 
+                        <select 
+                            name="stage"
+                            value={stage}
+                            className="form-control"
                             onChange={this.handleChange}
-                        />
+                        >
+                            <option value="suspect">
+                                見込み
+                            </option>
+                            <option value="introduction">
+                                OI
+                            </option>
+                            <option value="opportunity">
+                                商機
+                            </option>
+                            <option value="closing">
+                                クロージング
+                            </option>
+                        </select>
                     </div>
 
                     <button className="btn btn-primary">Save</button>
@@ -216,17 +227,14 @@ class LeadForm extends Component {
                         onClick={this.clearForm}
                     >Clear</button>
 
-                    <p>{this.state.name}</p>
-                    <p>{this.state.category}</p>
-                    <p>{this.state.description}</p>
-                    <p>{this.state.stage}</p>
-                    <p>{this.state.person}</p>
                 </form>
                 <Link 
                         to={{
                             pathname: `/leads/`,
                             }}
-                >Back to Leads</Link>
+                >
+                    Back to Leads
+                </Link>
             </div>
         )
     }

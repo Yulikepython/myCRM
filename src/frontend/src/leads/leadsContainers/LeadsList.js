@@ -7,9 +7,6 @@ import "whatwg-fetch"
 //function
 import loadAPIs from "../../functions/loadAPIs"
 
-//other components
-import LeadInline from "./LeadInline"
-
 class LeadsList extends Component {
     constructor(props){
         super(props)
@@ -59,20 +56,6 @@ class LeadsList extends Component {
                                     state: {fromDashboard: false}
                                 }}>+
                 </Link>
-                {/* togglerthing */}
-                {/* { (csrfToken !== undefined && csrfToken !== null) ?
-                <div>
-                    <button 
-                        className="btn btn-primary btn-sm"
-                        onClick={this.changeCreateFormClass}
-                    >+</button>
-                    <div className={this.state.createFormClass}>
-                        <div className="my-2">
-                            <LeadForm newApiCreated={this.handleNewApi} />   
-                        </div>
-                    </div>
-                </div>
-                : ""} */}
                 <table className="table">
                     <thead className="thead-success">
                         <tr>
@@ -85,20 +68,24 @@ class LeadsList extends Component {
                     <tbody>
                         {apiList.length > 0 ? 
                             apiList.map((leadItem, index)=>{
+                                const shortenDescription = leadItem.description.length > 30 ? leadItem.description.slice(0,30) + "...（続き）"
+                                    :leadItem.description
                                 return (
-                                    <LeadInline 
-                                        key={index}
-                                        num={index}
-                                        id={leadItem.id}
-                                        name = {leadItem.name}
-                                        category={leadItem.category}
-                                        description={leadItem.description}
-                                        step={leadItem.step}//this would be a model id
-                                        person={leadItem.person}
-                                    />
+                                    <tr key={leadItem.id}>
+                                        <th>
+                                            <Link to={{
+                                                pathname: `/leads/${leadItem.id}`,
+                                                state: {fromDashboard: false}
+                                            }}>{ index + 1 }
+                                            </Link>
+                                        </th>
+                                        <td>{leadItem.name}</td>
+                                        <td>{leadItem.stage}</td>
+                                        <td>{shortenDescription}</td>
+                                    </tr>
                                 )
-                            }) : 
-                            '<p>No Leads Found</p>'
+                            }) 
+                            : <tr><td>No Leads Found</td></tr>
                         }
                     </tbody>
                 </table>

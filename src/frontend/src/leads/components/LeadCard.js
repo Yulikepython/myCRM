@@ -5,9 +5,9 @@ const LeadCard = (props) => {
     return (
         <div className="site-card-border-less-wrapper">
             <Card title={props.st.name} bordered={false} style={{ width: 300 }}>
-                <p>カテゴリー：　{props.st.category}</p>
-                <p>{props.st.description}</p>
-                <p>{props.st.step}</p>
+                <div>カテゴリー：　{props.st.category}</div>
+                <div>{props.st.description}</div>
+                <div>{props.st.stage}</div>
             </Card>
         </div>
 )

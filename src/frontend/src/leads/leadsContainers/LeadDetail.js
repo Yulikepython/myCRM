@@ -84,7 +84,7 @@ class LeadDetail extends Component{
         const displayText = doneLoading ? < LeadCard st={leadItem}/> : "loading..."
         return (
             <div>
-                <p>{displayText}</p>
+                <div>{displayText}</div>
                 <Link 
                         to={{
                             pathname: `/leads/`,
