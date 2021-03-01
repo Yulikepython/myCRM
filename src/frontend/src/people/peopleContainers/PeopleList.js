@@ -84,7 +84,13 @@ class PeopleList extends Component {
                             apiList.map((peopleItem, index)=>{
                                 return (
                                     <tr> 
-                                        <td scope="col">{peopleItem.id}</td>
+                                        <th scope="col">
+                                            <Link to={{
+                                                    pathname: `/people/${peopleItem.id}`,
+                                                    state: {fromDashboard: false}
+                                                }}>{ index + 1 }
+                                            </Link>
+                                        </th>
                                         <td>{ peopleItem.lastName }</td>
                                         <td>{peopleItem.firstName}</td>
                                         <td>
