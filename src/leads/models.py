@@ -17,6 +17,7 @@ class Approach(models.Model):
         return self.approach_title
 
 class Person(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     lastName = models.CharField(max_length=100)
     firstName = models.CharField(max_length=100, blank=True, null=True)
     email = models.EmailField(max_length=100, blank=True, null=True)

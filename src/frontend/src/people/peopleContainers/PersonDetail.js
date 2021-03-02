@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import cookie from "react-cookies"
 import 'whatwg-fetch'
+import {Descriptions } from "antd"
 import { Link } from 'react-router-dom'
 import PersonForm from "./PersonForm"
 
@@ -14,16 +15,16 @@ class PersonDetail extends Component{
             personItem: "",
             doneLoading:false
         }
-        this.handleLeadItemUpdated = this.handleLeadItemUpdated.bind(this)
+        this.handlePersonItemUpdated = this.handlePersonItemUpdated.bind(this)
         }
     
-    handleLeadItemUpdated(leadItemData){
+    handlePersonItemUpdated(personItemData){
         this.setState({
-            leadItem: leadItemData
+            personItem: personItemData
         })
     }
 
-    loadLeadDetail(id){
+    loadPersonDetail(id){
         let thisComp = this
         const endpoint = `/api/people/${id}/`
         const lookupOptions = {
@@ -53,7 +54,7 @@ class PersonDetail extends Component{
                         personItem: null
                     })
                 } else {
-                thisComp.setState({      
+                thisComp.setState({
                         doneLoading: true,
                         personItem: responseData,
                     })
@@ -74,31 +75,28 @@ class PersonDetail extends Component{
             id: id,
             doneLoading: false
         })
-        this.loadLeadDetail(id)
+        this.loadPersonDetail(id)
     }
     }
     render(){
         const {doneLoading, personItem} = this.state
-        
         return (
             <div>
-                <ul>
-                    <li>
-                        {personItem.lastName} {personItem.firstName}
-                    </li>
-                    <li>
+                <Descriptions title="User Info" bordered={true}>
+                    <Descriptions.Item label="名前" className="d-block">
+                                {personItem.lastName} {personItem.firstName}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Eメール"className="d-block" >
                         {personItem.email}
-                    </li>
-                    <li>
+                    </Descriptions.Item>
+                    <Descriptions.Item label="電話番号" className="d-block" >
                         {personItem.phone_number}
-                    </li>
-                </ul>
-                <Link 
-                        to={{
-                            pathname: `/people/`,
-                            }}
-                >Back to People</Link>
-                <PersonForm />
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Remark" className="d-block">
+                        empty
+                    </Descriptions.Item>
+                </Descriptions>
+                { personItem.owner === true ? <PersonForm person={personItem} personItemUpdated={this.handlePersonItemUpdated} /> : ""}
             </div>
             
         )
