@@ -1,0 +1,34 @@
+[Python]
+twitter bot --- 202102
+line bot
+
+[css]
+tailwindcss --- 202102
+react
+
+[Django]
+allauth -> snippetを作る、説明できるようにする
+login, logout, signup
+tailwind
+
+
+
+-mankikanri
+mankikanri data 移行 -> 手打ちでやる
+
+
+-pswd
+update view - when you save -> alert yes or no
+
+copy to clipboard
+detailview
+createview
+wanna be better get_queryset() -> change from model.QuerySet
+
+
+<!!!done!!!>
+[django]
+access only by superuser
+make index for superuser 202101
+search
+update
