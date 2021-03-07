@@ -5,6 +5,7 @@ import LeadDetail from "./leads/leadsContainers/LeadDetail"
 import LeadCreate from "./leads/leadsContainers/LeadCreate"
 
 import PeopleList from "./people/peopleContainers/PeopleList"
+import PersonDetail from "./people/peopleContainers/PersonDetail"
 
 import { Button } from 'antd'
 
@@ -21,6 +22,7 @@ class App extends Component {
                         <Route exact path="/leads/" component={LeadsList} />
                         <Route exact path="/leads/:id" component={LeadDetail} />
                         <Route exact path="/people/" component={PeopleList} />
+                        <Route exact path="/people/:id" component={PersonDetail} />
                         <Route component={LeadsList} />
                     </Switch>
                 </BrowserRouter>

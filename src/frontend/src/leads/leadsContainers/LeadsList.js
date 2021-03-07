@@ -89,7 +89,7 @@ class LeadsList extends Component {
                                     </tr>
                                 )
                             }) 
-                            : <tr><td>No Leads Found</td></tr>
+                            : <tr><td>No Lead Found</td></tr>
                         }
                     </tbody>
                 </table>

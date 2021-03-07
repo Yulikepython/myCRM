@@ -83,8 +83,14 @@ class PeopleList extends Component {
                         {apiList.length > 0 ? 
                             apiList.map((peopleItem, index)=>{
                                 return (
-                                    <tr> 
-                                        <td scope="col">{peopleItem.id}</td>
+                                    <tr key={peopleItem.id}> 
+                                        <th scope="col">
+                                            <Link to={{
+                                                    pathname: `/people/${peopleItem.id}`,
+                                                    state: {fromDashboard: false}
+                                                }}>{ index + 1 }
+                                            </Link>
+                                        </th>
                                         <td>{ peopleItem.lastName }</td>
                                         <td>{peopleItem.firstName}</td>
                                         <td>
@@ -94,7 +100,7 @@ class PeopleList extends Component {
                                     </tr>
                                 )
                             }) : 
-                            '<p>No Leads Found</p>'
+                            <tr><td>No Person Found</td></tr>
                         }
                     </tbody>
                 </table>

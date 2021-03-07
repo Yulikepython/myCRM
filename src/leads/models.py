@@ -8,20 +8,13 @@ step_selectors = ["suspect", "introduction", "opportunity", "closing"]
 step_choices = [(step, step) for step in step_selectors]
 
 
-class Approach(models.Model):
-    approach_date = models.DateField()
-    approach_title = models.CharField(max_length=100)
-    approach_description = models.TextField()
-
-    def __str__(self):
-        return self.approach_title
-
 class Person(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     lastName = models.CharField(max_length=100)
     firstName = models.CharField(max_length=100, blank=True, null=True)
     email = models.EmailField(max_length=100, blank=True, null=True)
     phone_number = models.CharField(max_length=50, blank=True, null=True)
-    approach = models.ForeignKey(Approach, on_delete=models.CASCADE, blank=True, null=True)
+
 
     def __str__(self):
         return f'{self.lastName} {self.firstName}'
@@ -39,6 +32,15 @@ class Lead(models.Model):
 
     def __str__(self):
         return self.name
+
+class Approach(models.Model):
+    lead = models.ForeignKey(Lead, on_delete=models.CASCADE, default=1)
+    approach_date = models.DateField()
+    approach_title = models.CharField(max_length=100)
+    approach_description = models.TextField()
+
+    def __str__(self):
+        return self.approach_title
 
 
 #postsave if stageNum==4, make instance of applicant and move on the stage of applicant
