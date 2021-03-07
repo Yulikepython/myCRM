@@ -10,9 +10,8 @@ class LeadForm extends Component {
         name: "",
         category:"",
         description: "",
-        stage: "",
+        stage: "suspect",
         person: "",
-        checking:false,
         errors: {},
     }
 
@@ -128,7 +127,7 @@ class LeadForm extends Component {
             name: "",
             category:"",
             description: "",
-            stage: "",
+            stage: "suspect",
             person: "",
         })
     }

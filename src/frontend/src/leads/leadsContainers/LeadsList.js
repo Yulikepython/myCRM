@@ -53,7 +53,11 @@ class LeadsList extends Component {
                 <h1>{this.state.view}</h1>
                 <Link to={{
                                     pathname: "/leads/create",
-                                    state: {fromDashboard: false}
+                                    state: {
+                                        fromDashboard: false,
+                                        handleNewApi: this.handleNewApi
+
+                                    }
                                 }}>+
                 </Link>
                 <table className="table">

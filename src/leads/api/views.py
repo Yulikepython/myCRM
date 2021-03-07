@@ -1,7 +1,5 @@
 from rest_framework import permissions
 from rest_framework.generics import (
-                                    ListAPIView, 
-                                    RetrieveAPIView,
                                     ListCreateAPIView,
                                     DestroyAPIView,
                                     RetrieveUpdateDestroyAPIView,
@@ -11,9 +9,12 @@ from leads.models import Lead, Person
 from leads.api.serializers import LeadSerializer, PersonSerializer
 from leads.api.permissions import IsOwnerOrReadOnly
 
+from leads.models import *
+
 class LeadApiListCreate(ListCreateAPIView):
     queryset = Lead.objects.all()
     serializer_class = LeadSerializer
+    model = Lead
 
 class LeadApiRetrieve(RetrieveUpdateDestroyAPIView):
     queryset = Lead.objects.all()
