@@ -7,6 +7,8 @@ User = get_user_model()
 step_selectors = ["suspect", "introduction", "opportunity", "closing"]
 step_choices = [(step, step) for step in step_selectors]
 
+category_selectors = ["住居（賃貸）","住居（テナント）","売買","修繕","保険"]
+category_choices = [(category, category) for category in category_selectors]
 
 class Person(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
@@ -23,9 +25,8 @@ class Person(models.Model):
 class Lead(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     name = models.CharField(max_length=100)
-    category = models.CharField(max_length=20)
+    category = models.CharField(max_length=20, choices=category_choices)
     description = models.TextField()
-    # step = models.OneToOneField(Step, on_delete=models.CASCADE, blank=True, null=True)
     stage = models.CharField(max_length=20, choices=step_choices, default="suspect")
     person = models.ForeignKey(Person, on_delete=models.CASCADE, default=1)
     created_at = models.DateTimeField(auto_now_add=True)

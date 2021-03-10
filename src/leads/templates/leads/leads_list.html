@@ -8,7 +8,9 @@
 <div class="container">
     {% if object_list %}
         {% for obj in object_list %}
-            <p>{{ obj }}</p>
+            <p>
+                <a href="{% url 'lead_detail' obj.pk %}" >{{ obj.name }}</a> - {{obj.stage}} - {{ obj.person }}
+            </p>
         {% endfor %}
     {% endif %}
 </div>

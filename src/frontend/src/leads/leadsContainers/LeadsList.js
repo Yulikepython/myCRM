@@ -55,7 +55,7 @@ class LeadsList extends Component {
                                     pathname: "/leads/create",
                                     state: {
                                         fromDashboard: false,
-                                        handleNewApi: this.handleNewApi
+                                        // handleNewApi: this.handleNewApi
 
                                     }
                                 }}>+

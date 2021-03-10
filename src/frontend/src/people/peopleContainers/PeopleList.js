@@ -50,11 +50,11 @@ class PeopleList extends Component {
         return(
             <div>
                 <h1>{this.state.view}</h1>
-                {/* <Link to={{
+                <Link to={{
                                     pathname: "/people/create",
                                     state: {fromDashboard: false}
                                 }}>+
-                </Link> */}
+                </Link>
                 {/* togglerthing */}
                 {/* { (csrfToken !== undefined && csrfToken !== null) ?
                 <div>

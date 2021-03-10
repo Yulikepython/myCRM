@@ -41,7 +41,7 @@ class PersonForm extends Component {
     createPerson(data){
         const endpoint = "/api/people/"
         const csrfToken = cookie.load('csrftoken')
-        // let thisComp = this
+        let thisComp = this
     
         if (csrfToken !== undefined) {
             const lookupOptions = {
@@ -56,10 +56,10 @@ class PersonForm extends Component {
             fetch(endpoint, lookupOptions)
                 .then(response => response.json())
                 .then(responseData => {
-                    console.log(responseData)
-                    // if (thisComp.props.newApiCreated){
-                    //     thisComp.props.newApiCreated(responseData)
-                    // }
+                    // console.log(responseData)
+                    if (thisComp.props.newApiCreated){
+                        thisComp.props.newApiCreated(responseData)
+                    }
                     this.clearForm()
                 })
                 .catch(function(error){
@@ -152,7 +152,7 @@ class PersonForm extends Component {
                         <input 
                             type="text" 
                             name="lastName" 
-                            value={this.state.lastName}
+                            value={lastName}
                             className="form-control" 
                             placeholder="名字" 
                             onChange={this.handleChange}
