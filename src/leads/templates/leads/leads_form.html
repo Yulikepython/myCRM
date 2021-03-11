@@ -9,8 +9,9 @@
     <form method="POST">{% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Save</button>
-        <a href="{% url 'person_create' %}">add preson</a>
-        <div> choose or add person( go to the page)</div>
+        {% if update %}
+            <a href="{% url 'person_create' %}">choose or add person</a>
+        {% endif %}
     </form>
 </div>
 {% endblock %}

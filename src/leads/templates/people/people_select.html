@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ object}}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form method="GET">
+        <label>担当者の名前を入力してください</label>
+        <input type="text" name="people-search" />
+        <button type="submit">Search</button>
+    </form>
+    {% if object_list %}
+    <ul>
+        {% for obj in object_list %}
+        <li>
+            <a href="{% url 'lead_create' %}?person={{obj.pk}}">{{ obj }}</a>
+        </li>
+        {% endfor %}
+    {% endif %}
+    </ul>
+    <a href="{% url 'person_create' %}">
+        Add Person
+    </a>
+</div>
+{% endblock %}

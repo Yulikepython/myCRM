@@ -6,10 +6,15 @@
 
 {% block content %}
 <div class="container">
+    <div>
+        <a href="{% url 'people_select' %}">Add Lead</a>
+    </div>
     {% if object_list %}
         {% for obj in object_list %}
             <p>
-                <a href="{% url 'lead_detail' obj.pk %}" >{{ obj.name }}</a> - {{obj.stage}} - {{ obj.person }}
+                {{ obj.name }} - {{obj.stage}} - {{ obj.person }} 
+                <a href="{% url 'lead_detail' obj.pk %}" >詳細</a>
+                <a href="{% url 'lead_update' obj.pk %}" >編集</a>
             </p>
         {% endfor %}
     {% endif %}

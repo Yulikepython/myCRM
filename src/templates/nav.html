@@ -1,4 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand text-success" href="/">MyCRM</a>
+  <a class="navbar-brand text-success" href="{% url 'lead_list' %}">MyCRM</a>
   <div>{{request.user}}</div>
+  <div>
+    <form method="GET">
+      <input type="text" name="search" />
+    </form>
+  </div>
 </nav>
