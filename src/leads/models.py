@@ -94,3 +94,5 @@ def person_post_save_make_lead(sender, instance, created, **kwargs):
         lead_obj.save()
 
 post_save.connect(person_post_save_make_lead, sender=Person)
+
+#if the stage is the last one, making obj for applicant
