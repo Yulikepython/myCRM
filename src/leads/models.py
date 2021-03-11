@@ -2,6 +2,9 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth import get_user_model
 from django.db.models import Q
+from datetime import datetime
+
+from applicant.models import PropertyApplicationPhase
 
 User = get_user_model()
 
@@ -95,4 +98,9 @@ def person_post_save_make_lead(sender, instance, created, **kwargs):
 
 post_save.connect(person_post_save_make_lead, sender=Person)
 
-#if the stage is the last one, making obj for applicant
+def stage_goes_last(sender, instance, **kwargs):
+    if instance.stage == "closing":
+        applicant_obj = PropertyApplicationPhase(applicant_date=datetime.now(),lead=instance)
+        applicant_obj.save()
+
+post_save.connect(stage_goes_last, sender=Lead)

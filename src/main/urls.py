@@ -13,4 +13,5 @@ urlpatterns = [
     path('api/', include("realestate.api.urls")),
     path('api/', include("applicant.api.urls")),
     path('crm/', include("leads.urls")),
+    path('applicant/', include("applicant.urls")),
 ]

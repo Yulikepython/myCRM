@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    {% comment %} <div>
+        <a href="{% url 'people_select' %}">Add Lead</a>
+    </div> {% endcomment %}
+    {% if object_list %}
+        {% for obj in object_list %}
+            <p>
+                {{ obj.applicant_date }} - {{obj.lead.name}} - {{ obj.memo|slice:":30" }}... 
+                {% comment %} <a href="{% url 'lead_detail' obj.pk %}" >詳細</a> {% endcomment %}
+                <a href="{% url 'applicant_update' obj.pk %}" >編集</a>
+            </p>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

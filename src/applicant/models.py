@@ -1,12 +1,12 @@
 from django.db import models
 
-from leads.models import Lead
+# from leads.models import Lead
 
 #have to figure out what step to pass
 
 class PropertyApplicationPhase(models.Model):
     applicant_date = models.DateField()
-    lead = models.ForeignKey(Lead, on_delete=models.CASCADE, verbose_name="Lead")
+    lead = models.ForeignKey("leads.Lead", on_delete=models.CASCADE, verbose_name="Lead")
     applicant_information = models.BooleanField(default=False, verbose_name="申込情報")
     surety_screening = models.BooleanField(default=False, verbose_name="保証会社審査")
     owner_screening = models.BooleanField(default=False, verbose_name="オーナー審査")
@@ -16,8 +16,7 @@ class PropertyApplicationPhase(models.Model):
     contract_date = models.DateField(blank=True, null=True)
     contract_applicant = models.BooleanField(default=False, verbose_name="契約締結")
     move_in_date = models.DateField(blank=True, null=True)
-    all_done = models.BooleanField(default=False)
-    memo = models.TextField(blank=True, null=True)
+    memo = models.TextField(verbose_name="メモ", blank=True, null=True)
 
     def __str__(self):
         return self.lead.name

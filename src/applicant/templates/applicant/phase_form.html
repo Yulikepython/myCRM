@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ object}}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{{object.lead }}</h1>
+    <form method="POST">{% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a class="btn btn-danger" href="{% url 'applicant_list' %}">戻る</a>
+        {% if update %}
+        {% endif %}
+    </form>
+    
+</div>
+{% endblock %}
