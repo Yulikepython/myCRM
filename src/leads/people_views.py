@@ -24,6 +24,7 @@ class PeopleSelectView(ListView):
 
     def get_queryset(self, query=None, *args, **kwargs):
         data = self.request.GET
+        # can we use try:??
         if data:
             if "people-search" in data.keys():
                 query = data["people-search"]
