@@ -20,3 +20,17 @@ class PropertyApplicationPhase(models.Model):
 
     def __str__(self):
         return self.lead.name
+
+    def get_progress(self):
+        value = 0
+        if self.surety_screening and self.owner_screening:
+            value += 25
+        if self.applicant_information:
+            value +=25
+        if self.document_inform and self.invoice_inform_applicant and self.invoice_inform_agency:
+            value +=25
+        if self.contract_date and self.contract_applicant:
+            value += 15
+        if self.move_in_date:
+            value += 10
+        return value

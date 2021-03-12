@@ -7,7 +7,6 @@ class LeadForm(forms.ModelForm):
         model = Lead
         fields = "__all__"
 
-    
     def __init__(self, person=None, *args, **kwargs):
         if person is not None:
             self.base_fields["person"].initial = person

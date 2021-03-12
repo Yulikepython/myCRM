@@ -81,6 +81,18 @@ class Lead(models.Model):
     def __str__(self):
         return self.name
 
+    def get_progress(self):
+        value=0
+        if self.stage == "suspect":
+            value = 25
+        elif self.stage == "introduction":
+            value = 50
+        elif self.stage == "opportunity":
+            value = 75
+        else:
+            value = 100
+        return value
+
 class Approach(models.Model):
     lead = models.ForeignKey(Lead, on_delete=models.CASCADE, default=1)
     approach_date = models.DateField()
@@ -91,6 +103,8 @@ class Approach(models.Model):
         return self.approach_title
 
 
+
+# post_save methods
 def person_post_save_make_lead(sender, instance, created, **kwargs):
     if created:
         lead_obj = Lead(name=instance.lastName, person=instance)

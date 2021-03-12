@@ -10,12 +10,41 @@
         <a href="{% url 'people_select' %}">Add Lead</a>
     </div> {% endcomment %}
     {% if object_list %}
+    <div class="row my-3 py-3 border-bottom border-dark border-4 bg-dark text-white">
+        <div class="col">Date</div>
+        <div class="col">Lead Name</div>
+        <div class="col">Progress</div>
+        <div class="col">Memo</div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
         {% for obj in object_list %}
-            <p>
-                {{ obj.applicant_date }} - {{obj.lead.name}} - {{ obj.memo|slice:":30" }}... 
-                {% comment %} <a href="{% url 'lead_detail' obj.pk %}" >詳細</a> {% endcomment %}
-                <a href="{% url 'applicant_update' obj.pk %}" >編集</a>
-            </p>
+            <div class="row my-3 py-3 border-bottom border-secondary border-2">
+                <div class="col">
+                    {{ obj.applicant_date }}
+                </div>
+                <div class="col">
+                    {{obj.lead.name}}
+                </div>
+                <div class="col">
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: {{obj.get_progress }}%" aria-valuenow="{{obj.get_progress }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="col">
+                    {% if obj.memo %}
+                        {{ obj.memo|slice:":30" }}... 
+                    {% else %}
+                        メモはありません
+                    {% endif %}
+                </div>
+                <div class="col">
+                    {% comment %} <a href="{% url 'lead_detail' obj.pk %}" >詳細</a>{% endcomment %}
+                </div>
+                <div class="col">
+                    <a href="{% url 'applicant_update' obj.pk %}" >編集</a>
+                </div>
+            </div>
         {% endfor %}
     {% endif %}
 </div>

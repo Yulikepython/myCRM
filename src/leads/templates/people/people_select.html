@@ -5,23 +5,23 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <form method="GET">
-        <label>担当者の名前を入力してください</label>
-        <input type="text" name="people-search" />
-        <button type="submit">Search</button>
+<div class="container text-center">
+    <form method="GET" class="my-3">
+        <div class="input-group w-50 mx-auto my-auto">
+            <input type="search" class="form-control" placeholder="名前を検索" aria-label="search" name="people-search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </div>
     </form>
+
     {% if object_list %}
-    <ul>
-        {% for obj in object_list %}
-        <li>
-            <a href="{% url 'lead_create' %}?person={{obj.pk}}">{{ obj }}</a>
-        </li>
-        {% endfor %}
+        <div class="list-group">
+            {% for obj in object_list %}
+                <a href="{% url 'lead_create' %}?person={{obj.pk}}" type="button" class="list-group-item list-group-item-action">
+                    {{ obj }}
+                </a>
+            {% endfor %}
+            <a href="{% url 'person_create' %}" type="button" class="list-group-item list-group-item-action list-group-item-info">Add New</a>
+        </div>
     {% endif %}
-    </ul>
-    <a href="{% url 'person_create' %}">
-        Add Person
-    </a>
 </div>
 {% endblock %}

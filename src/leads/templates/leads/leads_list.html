@@ -6,16 +6,37 @@
 
 {% block content %}
 <div class="container">
-    <div>
-        <a href="{% url 'people_select' %}">Add Lead</a>
-    </div>
     {% if object_list %}
+    <div class="row my-3 py-3 border-bottom border-dark border-4 bg-dark text-white">
+        <div class="col">リード名</div>
+        <div class="col">担当者</div>
+        <div class="col">Progress</div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="float-right mr-5 text-info">
+            <a href="{% url 'people_select' %}"><i class="fas fa-plus-square fa-lg"></i></a>
+        </div>
+    </div>
         {% for obj in object_list %}
-            <p>
-                {{ obj.name }} - {{obj.stage}} - {{ obj.person }} 
-                <a href="{% url 'lead_detail' obj.pk %}" >詳細</a>
-                <a href="{% url 'lead_update' obj.pk %}" >編集</a>
-            </p>
+            <div class="row my-3 py-3 border-bottom border-secondary border-2">
+                <div class="col">
+                    {{ obj.name }}
+                </div>
+                <div class="col">
+                    {{obj.person}}
+                </div>
+                <div class="col">
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: {{obj.get_progress }}%" aria-valuenow="{{obj.get_progress }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="col">
+                    <a href="{% url 'lead_detail' obj.pk %}" >詳細</a>
+                </div>
+                <div class="col">
+                    <a href="{% url 'applicant_update' obj.pk %}" >編集</a>
+                </div>
+            </div>
         {% endfor %}
     {% endif %}
 </div>

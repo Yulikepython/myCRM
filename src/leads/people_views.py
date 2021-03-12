@@ -21,7 +21,6 @@ class PersonCreateView(CreateView):
 class PeopleSelectView(ListView):
     template_name="people/people_select.html"
     model = Person
-    form_class=PersonForm
 
     def get_queryset(self, query=None, *args, **kwargs):
         data = self.request.GET
